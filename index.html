@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Chat</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<!-- Sidebar -->
+<aside class="sidebar">
+  <div class="sidebar-header">
+    <button class="new-chat-btn" onclick="startNewChat()">
+      <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2m5 11h-4v4h-2v-4H7v-2h4V7h2v4h4z"/></svg>
+      New Chat
+    </button>
+  </div>
+  <div class="sidebar-content">
+    <div class="history-label">History</div>
+    <div id="historyList" class="history-list">
+      <!-- Chat items will be added here -->
+    </div>
+  </div>
+</aside>
+
+<div class="main-container">
+  <header>
+    <div class="logo-dot"></div>
+    <div class="header-title"><span>AI</span> Chat</div>
+    <div class="model-selector">
+      <label>Model</label>
+      <select id="modelSelect">
+        <option value="openai/gpt-4o" selected>GPT-4o</option>
+        <option value="openai/gpt-4o-mini">GPT-4o Mini</option>
+        <option value="openai/gpt-3.5-turbo">GPT-3.5 Turbo</option>
+        <option value="google/gemini-flash-1.5">Gemini Flash 1.5</option>
+        <option value="google/gemini-pro-1.5">Gemini Pro 1.5</option>
+        <option value="meta-llama/llama-3.1-70b-instruct">Llama 3.1 70B</option>
+        <option value="mistralai/mistral-7b-instruct">Mistral 7B</option>
+        <option value="deepseek/deepseek-chat">DeepSeek Chat</option>
+      </select>
+    </div>
+  </header>
+
+  <div class="config-bar">
+    <div class="key-input-wrap">
+      <label>API Key</label>
+      <input type="password" id="apiKey" placeholder="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" autocomplete="off"/>
+      <button class="toggle-vis" onclick="toggleKeyVis()">show</button>
+    </div>
+    <div class="system-wrap">
+      <label>System</label>
+      <input type="text" id="systemPrompt" placeholder="You are a helpful assistant..." value="You are a helpful, smart, and concise AI assistant."/>
+    </div>
+  </div>
+
+  <div id="messages">
+    <div class="empty-state" id="emptyState">
+      <div class="empty-icon">✦</div>
+      <h2>Start a conversation</h2>
+      <p>Enter your OpenRouter API key above, choose a model, and type a message below.</p>
+    </div>
+  </div>
+
+  <div class="input-area">
+    <div class="input-row">
+      <textarea id="userInput" placeholder="Type a message…" rows="1"
+        oninput="autoResize(this)" onkeydown="handleKey(event)"></textarea>
+      <button class="send-btn" id="sendBtn" onclick="sendMessage()" title="Send">
+        <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+      </button>
+    </div>
+    <div class="input-meta">
+      <span class="input-hint">Enter to send &nbsp;·&nbsp; Shift+Enter for new line</span>
+      <button class="clear-btn" onclick="clearChat()">clear chat</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
